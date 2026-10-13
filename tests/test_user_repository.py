@@ -5,7 +5,7 @@ from src.secure_service_with_tdd.repository import InMemoryUserRepository
 
 
 @pytest.fixture
-def user_repo():
+def user_repo() -> InMemoryUserRepository:
     """Provides a fresh users store for each test"""
     return InMemoryUserRepository()
 
