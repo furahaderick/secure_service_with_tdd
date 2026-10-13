@@ -1,5 +1,7 @@
 import pytest
 
+from src.secure_service_with_tdd.password_hasher import BcryptPasswordHasher
+
 
 @pytest.fixture
 def hasher() -> BcryptPasswordHasher:
