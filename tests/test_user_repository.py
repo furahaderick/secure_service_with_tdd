@@ -1,5 +1,8 @@
 import pytest
 
+from src.secure_service_with_tdd.user import User
+from src.secure_service_with_tdd.repository import InMemoryUserRepository
+
 
 @pytest.fixture
 def user_repo():
