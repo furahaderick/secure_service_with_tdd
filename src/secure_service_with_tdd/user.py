@@ -1,2 +1,7 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class User:
-    pass
+    username: str
+    password_hash: str
