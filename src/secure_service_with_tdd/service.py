@@ -1,3 +1,5 @@
+import logging
+
 from src.secure_service_with_tdd.exceptions import (
     InvalidPasswordException,
     UserAlreadyExistsException,
@@ -7,8 +9,10 @@ from src.secure_service_with_tdd.interfaces import PasswordHasher, UserRepositor
 from src.secure_service_with_tdd.user import User
 
 
-class UserService:
+logger = logging.getLogger(__name__)
 
+
+class UserService:
     MIN_PASSWORD_LENGTH = 8
 
     def __init__(
@@ -26,6 +30,14 @@ class UserService:
             )
 
         if self.user_repo.get_user_by_username(username) is not None:
+            logger.warning(
+                "User registration rejected",
+                extra={
+                    "event": "registration_rejected",
+                    "reason": "duplicate_username",
+                    "username": username,
+                },
+            )
             raise UserAlreadyExistsException(f"User '{username}' already exists.")
 
         password_hash = self.password_hasher.hash_password(password)
@@ -38,6 +50,15 @@ class UserService:
 
         self.user_repo.save_new_user(user)
 
+        logger.info(
+            "User registered successfully",
+            extra={
+                "event": "registration_success",
+                "user_id": user.id,
+                "username": user.username,
+            },
+        )
+
         return user
 
     def login(self, username: str, password: str) -> User:
@@ -46,9 +67,35 @@ class UserService:
         user = self.user_repo.get_user_by_username(username)
 
         if user is None:
+            logger.warning(
+                "User authentication failed",
+                extra={
+                    "event": "authentication_failure",
+                    "reason": "user_not_found",
+                    "username": username,
+                },
+            )
             raise UserNotFoundException(f"User '{username}' was not found.")
 
         if not self.password_hasher.verify_password(password, user.password_hash):
+            logger.warning(
+                "User authentication failed",
+                extra={
+                    "event": "authentication_failure",
+                    "reason": "invalid_password",
+                    "user_id": user.id,
+                    "username": user.username,
+                },
+            )
             raise InvalidPasswordException("Invalid password.")
+
+        logger.info(
+            "User authenticated successfully",
+            extra={
+                "event": "authentication_success",
+                "user_id": user.id,
+                "username": user.username,
+            },
+        )
 
         return user
