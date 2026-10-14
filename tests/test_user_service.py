@@ -189,5 +189,4 @@ def test_failed_login_does_not_return_user(user_service):
     )
 
     with pytest.raises(InvalidPasswordException):
-        result = user_service.login("alice", "wrongpassword")
-        assert result is None
+        user_service.login("alice", "wrongpassword")
