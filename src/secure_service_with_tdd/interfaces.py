@@ -4,7 +4,6 @@ from src.secure_service_with_tdd.user import User
 
 
 class UserRepository(ABC):
-
     @abstractmethod
     def get_user_by_username(self, username: str) -> User | None: ...
 

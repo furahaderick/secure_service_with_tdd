@@ -2,7 +2,6 @@ from src.secure_service_with_tdd.user import User
 
 
 class TestUser:
-
     def test_user_can_be_created_with_expected_fields(self):
         user = User(1, "Alice", "my_hashed_password_123")
 
