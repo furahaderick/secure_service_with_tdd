@@ -47,7 +47,9 @@ password_hasher = BcryptPasswordHasher(rounds=12)
 user_service = UserService(user_repo, password_hasher)
 
 # Register a user
-user = user_service.register_user(user_id=1, username="alice", password="securepassword")
+user = user_service.register_user(
+    user_id=1, username="alice", password="securepassword"
+)
 
 # Login
 authenticated_user = user_service.login("alice", "securepassword")

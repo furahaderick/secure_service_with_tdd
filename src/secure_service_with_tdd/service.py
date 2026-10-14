@@ -8,7 +8,6 @@ from src.secure_service_with_tdd.exceptions import (
 from src.secure_service_with_tdd.interfaces import PasswordHasher, UserRepository
 from src.secure_service_with_tdd.user import User
 
-
 logger = logging.getLogger(__name__)
 
 

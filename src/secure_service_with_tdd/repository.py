@@ -1,5 +1,5 @@
-from src.secure_service_with_tdd.user import User
 from src.secure_service_with_tdd.interfaces import UserRepository
+from src.secure_service_with_tdd.user import User
 
 
 class InMemoryUserRepository(UserRepository):

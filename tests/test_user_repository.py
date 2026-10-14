@@ -1,5 +1,5 @@
-from src.secure_service_with_tdd.user import User
 from src.secure_service_with_tdd.interfaces import UserRepository
+from src.secure_service_with_tdd.user import User
 
 
 def test_save_and_get_new_user_by_username(user_repo: UserRepository):

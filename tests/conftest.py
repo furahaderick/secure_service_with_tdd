@@ -1,9 +1,9 @@
 import pytest
 
+from src.secure_service_with_tdd.interfaces import PasswordHasher
+from src.secure_service_with_tdd.password_hasher import BcryptPasswordHasher
 from src.secure_service_with_tdd.repository import InMemoryUserRepository
 from src.secure_service_with_tdd.service import UserService
-from src.secure_service_with_tdd.password_hasher import BcryptPasswordHasher
-from src.secure_service_with_tdd.interfaces import PasswordHasher
 
 
 @pytest.fixture
