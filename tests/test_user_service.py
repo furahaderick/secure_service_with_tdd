@@ -3,6 +3,7 @@ from unittest.mock import Mock
 import pytest
 
 from src.secure_service_with_tdd.interfaces import PasswordHasher
+from src.secure_service_with_tdd.service import UserService
 from src.secure_service_with_tdd.exceptions import (
     InvalidPasswordException,
     UserAlreadyExistsException,
